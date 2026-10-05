@@ -110,10 +110,7 @@ export const PROJECTS: IProject[] = [
         techStack: ['Angular', 'TypeScript', 'HTML', 'Laravel'],
         thumbnail: '/projects/thumbnail/pharmacy.svg',
         longThumbnail: '/projects/long/pharmacy.svg',
-        images: [
-            '/projects/images/pharmacy-1.svg',
-            '/projects/images/pharmacy-2.svg',
-        ],
+        images: ['/projects/images/pharmacy-1.svg'],
         description: `A pharmacy management system covering the day-to-day operations of a
         pharmacy, from prescription handling and stock control to billing and
         reporting. <br/> <br/>
@@ -139,10 +136,7 @@ export const PROJECTS: IProject[] = [
         techStack: ['Next.js', 'React', 'Laravel', 'Python'],
         thumbnail: '/projects/thumbnail/logistics.svg',
         longThumbnail: '/projects/long/logistics.svg',
-        images: [
-            '/projects/images/logistics-1.svg',
-            '/projects/images/logistics-2.svg',
-        ],
+        images: ['/projects/images/logistics-1.svg'],
         description: `A logistics management system for tracking shipments, fleet movement and
         delivery performance. <br/> <br/>
 
@@ -167,10 +161,7 @@ export const PROJECTS: IProject[] = [
         techStack: ['Next.js', 'Laravel'],
         thumbnail: '/projects/thumbnail/textile.svg',
         longThumbnail: '/projects/long/textile.svg',
-        images: [
-            '/projects/images/textile-1.svg',
-            '/projects/images/textile-2.svg',
-        ],
+        images: ['/projects/images/textile-1.svg'],
         description: `A textile management system for material procurement, order tracking and
         production planning. <br/> <br/>
 
