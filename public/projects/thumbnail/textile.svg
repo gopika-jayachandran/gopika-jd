@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-label="Textile Management System">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1c1c1c"/>
-      <stop offset="100%" stop-color="#2a2a2a"/>
+      <stop offset="0%" stop-color="#1b1b1b"/>
+      <stop offset="100%" stop-color="#2b2b2b"/>
     </linearGradient>
     <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
       <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
@@ -10,10 +10,10 @@
   </defs>
   <rect width="900" height="600" fill="url(#bg)"/>
   <rect width="900" height="600" fill="url(#grid)"/>
-  <rect x="24" y="24" width="852" height="552" fill="none" stroke="#E2E8F0" stroke-opacity="0.35" stroke-width="2"/>
-  <circle cx="450" cy="270" r="144" fill="none" stroke="#E2E8F0" stroke-opacity="0.18" stroke-width="2"/>
-  <text x="450" y="314.88" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="132" font-weight="bold" fill="#E2E8F0" fill-opacity="0.85">TM</text>
-  <text x="450" y="480" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="37" letter-spacing="6" fill="#DEDEDE">Textile</text>
-  <text x="450" y="526.25" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="37" letter-spacing="6" fill="#8A8A8A">Management System</text>
-  <text x="450" y="540" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="19" letter-spacing="3" fill="#8A8A8A">Next.js, Laravel, MySQL</text>
+  <rect x="20" y="20" width="860" height="560" fill="none" stroke="#CBD5E1" stroke-opacity="0.3" stroke-width="2"/>
+  <circle cx="450" cy="252" r="126" fill="none" stroke="#CBD5E1" stroke-opacity="0.2" stroke-width="2"/>
+  <text x="450" y="292.8" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="120" font-weight="bold" fill="#CBD5E1" fill-opacity="0.85">TM</text>
+  <text x="450" y="408" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="35" letter-spacing="6" fill="#DEDEDE">Textile</text>
+  <text x="450" y="453" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="35" letter-spacing="6" fill="#8A8A8A">Management System</text>
+  <text x="450" y="558" text-anchor="middle" font-family="Verdana, DejaVu Sans, sans-serif" font-size="18" letter-spacing="3" fill="#8A8A8A">Next.js, Laravel</text>
 </svg>

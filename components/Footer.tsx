@@ -46,7 +46,7 @@ const Footer = async () => {
                     {GENERAL_INFO.email}
                 </a>
 
-                <div className="space-y-2">
+                <div className="">
                     <a
                         href={GENERAL_INFO.github}
                         target="_blank"
@@ -65,18 +65,6 @@ const Footer = async () => {
                             </div>
                         )}
                     </a>
-
-                    <p className="text-sm text-muted-foreground">
-                        Built on the open-source portfolio by{' '}
-                        <a
-                            href="https://github.com/Tajmirul/portfolio-2.0"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:underline hover:text-white"
-                        >
-                            Tajmirul Islam
-                        </a>
-                    </p>
                 </div>
             </div>
         </footer>

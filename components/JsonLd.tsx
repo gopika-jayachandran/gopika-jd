@@ -1,5 +1,5 @@
 import {
-    ABOUT_ME,
+    PROFESSIONAL_SUMMARY,
     EDUCATION,
     GENERAL_INFO,
     LANGUAGES,
@@ -17,8 +17,8 @@ const personSchema = {
     '@id': `${SITE_URL}/#person`,
     name: GENERAL_INFO.name,
     alternateName: 'Gopika JD',
-    jobTitle: GENERAL_INFO.role,
-    description: ABOUT_ME,
+    jobTitle: GENERAL_INFO.title,
+    description: PROFESSIONAL_SUMMARY,
     url: SITE_URL,
     email: `mailto:${GENERAL_INFO.email}`,
     telephone: GENERAL_INFO.phone,
@@ -58,8 +58,8 @@ const websiteSchema = {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     url: SITE_URL,
-    name: `${GENERAL_INFO.name} — ${GENERAL_INFO.role}`,
-    description: ABOUT_ME,
+    name: `${GENERAL_INFO.name} — ${GENERAL_INFO.title}`,
+    description: PROFESSIONAL_SUMMARY,
     inLanguage: 'en-IN',
     publisher: { '@id': `${SITE_URL}/#person` },
 };

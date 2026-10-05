@@ -77,16 +77,20 @@ const Skills = () => {
                                         className="slide-up flex gap-3.5 items-center leading-none"
                                         key={item.name}
                                     >
-                                        <div>
-                                            <Image
-                                                src={item.icon}
-                                                alt={item.name}
-                                                width="40"
-                                                height="40"
-                                                className="max-h-10"
-                                            />
+                                        <div className="size-10 flex items-center justify-center">
+                                            {item.icon ? (
+                                                <Image
+                                                    src={item.icon}
+                                                    alt={item.name}
+                                                    width="40"
+                                                    height="40"
+                                                    className="max-h-10 w-auto"
+                                                />
+                                            ) : (
+                                                <span className="size-2.5 rounded-full bg-primary/70"></span>
+                                            )}
                                         </div>
-                                        <span className="text-2xl capitalize">
+                                        <span className="text-2xl">
                                             {item.name}
                                         </span>
                                     </div>

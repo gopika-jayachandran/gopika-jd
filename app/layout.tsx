@@ -12,7 +12,7 @@ import CustomCursor from '@/components/CustomCursor';
 import Preloader from '../components/Preloader';
 import StickyEmail from './_components/StickyEmail';
 import JsonLd from '@/components/JsonLd';
-import { ABOUT_ME, GENERAL_INFO, KEYWORDS, SITE_URL } from '@/lib/data';
+import { PROFESSIONAL_SUMMARY, GENERAL_INFO, KEYWORDS, SITE_URL } from '@/lib/data';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 
@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
 
     title: {
-        default: `${GENERAL_INFO.name} — ${GENERAL_INFO.role} | React, Next.js & Angular`,
+        default: `${GENERAL_INFO.name} — ${GENERAL_INFO.title} | React, Next.js & Angular`,
         template: `%s | ${GENERAL_INFO.name}`,
     },
 
-    description: ABOUT_ME,
+    description: PROFESSIONAL_SUMMARY,
 
     applicationName: `${GENERAL_INFO.name} Portfolio`,
 
@@ -59,15 +59,15 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'en_IN',
         url: SITE_URL,
-        siteName: `${GENERAL_INFO.name} — ${GENERAL_INFO.role}`,
-        title: `${GENERAL_INFO.name} — ${GENERAL_INFO.role}`,
-        description: ABOUT_ME,
+        siteName: `${GENERAL_INFO.name} — ${GENERAL_INFO.title}`,
+        title: `${GENERAL_INFO.name} — ${GENERAL_INFO.title}`,
+        description: PROFESSIONAL_SUMMARY,
     },
 
     twitter: {
         card: 'summary_large_image',
-        title: `${GENERAL_INFO.name} — ${GENERAL_INFO.role}`,
-        description: ABOUT_ME,
+        title: `${GENERAL_INFO.name} — ${GENERAL_INFO.title}`,
+        description: PROFESSIONAL_SUMMARY,
     },
 
     robots: {

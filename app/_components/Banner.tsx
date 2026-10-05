@@ -41,16 +41,22 @@ const Banner = () => {
                 ref={containerRef}
             >
                 <div className="max-md:grow max-md:flex flex-col justify-center items-start max-w-[544px]">
-                    <h1 className="banner-title slide-up-and-fade leading-[.95] text-6xl sm:text-[80px] font-anton">
-                        <span className="text-primary">FRONTEND</span>
-                        <br /> <span className="ml-4">DEVELOPER</span>
+                    <h1 className="banner-title slide-up-and-fade leading-[.95] text-5xl xs:text-[64px] sm:text-[72px] font-anton">
+                        <span className="text-primary">SOFTWARE</span>
+                        <br />{' '}
+                        <span className="ml-4 block">
+                            DEVELOPER
+                            <span className="block text-2xl xs:text-3xl sm:text-4xl text-muted-foreground mt-2 tracking-widest">
+                                FRONTEND / FULL-STACK
+                            </span>
+                        </span>
                     </h1>
                     <p className="banner-description slide-up-and-fade mt-6 text-lg text-muted-foreground">
                         Hi! I&apos;m{' '}
                         <span className="font-medium text-foreground">
                             Gopika
                         </span>
-                        . A Frontend Developer with 3+ years of experience
+                        . A Software Developer with 3+ years of experience
                         building responsive, high-performance web applications
                         with React, Next.js and Angular.
                     </p>

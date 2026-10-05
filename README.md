@@ -1,97 +1,161 @@
 # Gopika J D — Portfolio
 
-Personal portfolio website for **Gopika J D**, Frontend Developer working with
-HTML, CSS, JavaScript, TypeScript, React, Next.js and Angular.
+Production portfolio site for **Gopika J D**, Software Developer (Frontend / Full-Stack).
 
-Built with Next.js 15 (App Router), TypeScript, Tailwind CSS and GSAP.
+Next.js 15 App Router · React 19 · TypeScript · Tailwind CSS · GSAP
 
-## Sections
+---
 
-| Section     | Source                     |
-| ----------- | -------------------------- |
-| Banner      | Name, role, availability   |
-| About Me    | Professional summary       |
-| My Stack    | Technical skills           |
-| Experience  | Work history + highlights  |
-| Education   | Qualifications             |
-| Projects    | Key project case studies   |
-| Languages   | Languages spoken           |
-
-## Stack
-
-- [Next.js 15](https://nextjs.org) — App Router, RSC, metadata API, dynamic OG images
-- [TypeScript](https://www.typescriptlang.org)
-- [Tailwind CSS](https://tailwindcss.com)
-- [GSAP](https://gsap.com) + `@gsap/react` — scroll animations
-- [Lenis](https://lenis.darkroom.engineering) — smooth scrolling
-- [Lucide React](https://lucide.dev) — icons
-
-## Getting Started
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-### Scripts
-
-```bash
-npm run dev     # dev server (turbopack)
-npm run build   # production build
-npm start       # serve production build
-npm run lint    # eslint
-```
-
-## Environment Variables
-
-Every variable is optional — the site runs without any of them. Copy
-`.env.example` to `.env.local` to set them.
-
-| Variable                  | Used by                                       |
-| ------------------------- | --------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`    | `metadataBase`, `sitemap.ts`, `robots.ts`     |
-| `NEXT_PUBLIC_GITHUB_REPO` | footer star/fork count (`owner/repo`)         |
-| `NEXT_PUBLIC_GA_ID`       | Google Analytics ID                           |
-| `NEXT_PUBLIC_HOTJAR_ID`   | Hotjar site ID                                |
-
-## Editing Content
-
-All copy lives in [`lib/data.ts`](./lib/data.ts) — bio, stack, projects,
-experience, education and languages. Change that one file to update the whole
-site; no component edits needed.
+## Architecture
 
 ```
-lib/data.ts        content for every section
-app/layout.tsx     global SEO metadata, fonts, analytics
-app/robots.ts      robots.txt
-app/sitemap.ts     sitemap.xml
-app/icon.svg       favicon
-components/OgImage.tsx   link-preview image renderer
+app/
+  layout.tsx                 root shell — fonts, Lenis provider, SEO metadata, analytics slots
+  page.tsx                   home: composes the seven content sections
+  template.tsx               route-change transition overlay
+  robots.ts                  robots.txt (MetadataRoute)
+  sitemap.ts                 sitemap.xml incl. project routes
+  manifest.ts                web app manifest
+  icon.svg                   favicon
+  opengraph-image.tsx        default OG image (ImageResponse)
+  _components/               home page sections (client, GSAP animated)
+  projects/[slug]/
+    page.tsx                 SSG project route + per-project metadata
+    opengraph-image.tsx      per-project OG image
+    _components/ProjectDetails.tsx
+components/
+  Navbar, Footer, Preloader, CustomCursor, Button, SectionTitle
+  ArrowAnimation, ParticleBackground, ScrollProgressIndicator, TransitionLink, StickyEmail
+  JsonLd.tsx                 Person + WebSite JSON-LD
+  OgImage.tsx                shared OG image renderer
+lib/
+  data.ts                    single source of truth for all content
+  utils.ts                   cn() class merge helper
+types/index.ts               IProject, IStackItem, IExperience, IEducation, Variant
 ```
 
-## Replacing Placeholder Artwork
+### Rendering strategy
 
-Project screenshots are generated SVG placeholders. Drop real screenshots into
-`public/projects/` (same file names) or point the `thumbnail`,
-`longThumbnail` and `images` fields in `lib/data.ts` at your own files.
+| Route | Mode |
+| ----- | ---- |
+| `/` | Static (prerendered) |
+| `/projects/[slug]` | SSG via `generateStaticParams` (3 slugs) |
+| `/projects/[slug]/opengraph-image` | Dynamic (`ƒ`) |
+| `/robots.txt`, `/sitemap.xml`, `/manifest.webmanifest` | Static |
 
-Stack icons live in `public/logo/`.
+Shared JS is ~101 kB; the home route ships ~195 kB first load.
+
+### Content model
+
+All copy, skills, projects, experience, education and languages are declared in
+`lib/data.ts` and typed with the interfaces in `types/index.ts`. Sections read
+from that module, so content changes never require component edits.
+
+`MY_STACK` mirrors the resume's skill groups 1:1. Brand entries carry an `icon`
+path; capability entries (SSR, AJAX, Wireframing…) omit it and `Skills.tsx` falls
+back to a dot marker, keeping a single uniform grid.
+
+### Animation
+
+`ScrollTrigger` drives every section: enter/exit scrub timelines scoped to a
+container ref via `useGSAP`. `template.tsx` runs a GSAP page-transition wipe.
+`ReactLenis` provides smooth scrolling at the root, and the whole tree sits
+inside it so section offsets stay consistent.
+
+---
 
 ## SEO
 
-- Per-page `metadata` with title templates, canonical URLs and keywords
-- Open Graph + Twitter card metadata
-- Auto-generated link preview images (`app/opengraph-image.tsx` and
-  `app/projects/[slug]/opengraph-image.tsx`)
-- `Person` + `WebSite` JSON-LD structured data
-- `sitemap.xml`, `robots.txt` and a web app manifest
+- **Metadata API** — title template (`%s | Gopika J D`), description, keywords, canonical, category, authors, creator, publisher
+- **Open Graph / Twitter** — `summary_large_image`, locale `en_IN`
+- **Dynamic OG images** — `ImageResponse` (Satori) at `/opengraph-image` and per project; no binary assets to maintain
+- **Structured data** — `Person` + `WebSite` JSON-LD with `sameAs`, `knowsAbout`, `knowsLanguage`, `worksFor`, `alumniOf`, `hasCreated`
+- **Discovery** — `sitemap.xml` (home + projects), `robots.txt`, manifest
+- **Per-project** — title, description, keywords, canonical, article OG, plus its own OG image
 
-## License & Credit
+HTML tags are stripped from project descriptions before they reach metadata, so
+OG descriptions stay clean plain text.
 
-Licensed under the [MIT License](./LICENSE).
+---
 
-Built on the open-source
+## Performance
+
+- Route-level code splitting; project data pages are only loaded on `/projects/*`
+- `next/image` for raster assets; SVG assets bypass the optimizer automatically
+- Google fonts via `next/font` (self-hosted, preloaded, `display: swap`)
+- Images lazy-loaded below the fold
+
+---
+
+## Commands
+
+```bash
+npm install       # install
+npm run dev       # dev server  → http://localhost:3000
+npm run dev:turbo # dev server with Turbopack
+npm run build     # production build
+npm start         # serve production build
+npm run lint      # eslint (next/core-web-vitals + next/typescript)
+```
+
+> **Windows note:** Turbopack hashes font assets into very long filenames, which
+> can exceed the 260-char `MAX_PATH` limit in deeply nested folders. `npm run dev`
+> uses webpack and works everywhere; use `dev:turbo` from a short path if you
+> want Turbopack.
+
+---
+
+## Configuration
+
+| Variable                  | Purpose                                          |
+| ------------------------- | ------------------------------------------------ |
+| `NEXT_PUBLIC_SITE_URL`    | `metadataBase`, `sitemap.ts`, `robots.ts`        |
+| `NEXT_PUBLIC_GITHUB_REPO` | footer star/fork count (`owner/repo`)            |
+| `NEXT_PUBLIC_GA_ID`       | Google Analytics measurement ID                  |
+| `NEXT_PUBLIC_HOTJAR_ID`   | Hotjar site ID                                   |
+
+All optional — see `.env.example`. Analytics are injected only when the
+corresponding ID is set, so no third-party script loads in development.
+
+---
+
+## Customising
+
+**Content** — edit `lib/data.ts` (`GENERAL_INFO`, `PROFESSIONAL_SUMMARY`,
+`MY_STACK`, `PROJECTS`, `MY_EXPERIENCE`, `EDUCATION`, `LANGUAGES`).
+
+**Project artwork** — files live in `public/projects/{thumbnail,long,images}/`
+and currently hold generated SVG placeholders. Replace them with real
+screenshots using the same names, or repoint `thumbnail`, `longThumbnail` and
+`images` in `lib/data.ts`. Hover previews and mobile thumbnails are rendered at
+a 3:2 ratio; project detail images at 750:400.
+
+**Stack icons** — `public/logo/` (SVG brand marks, PNG for raster logos).
+
+**Theme** — CSS custom properties in `app/globals.css`, mapped in
+`tailwind.config.ts`.
+
+**OG images** — `components/OgImage.tsx`; edit the palette and layout there to
+restyle every generated card at once.
+
+---
+
+## Deploy
+
+Static output with dynamic OG routes — deploys cleanly to Vercel or any
+Node-capable host.
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
+
+UI and implementation are based on the open-source
 [portfolio-2.0](https://github.com/Tajmirul/portfolio-2.0) by
-[Tajmirul Islam](https://tajmirul.site), used with attribution.
+[Tajmirul Islam](https://tajmirul.site).

@@ -1,4 +1,5 @@
 'use client';
+import { PROFESSIONAL_SUMMARY } from '@/lib/data';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
@@ -73,23 +74,12 @@ const AboutMe = () => {
                     <div className="md:col-span-7">
                         <div className="text-lg text-muted-foreground max-w-[450px]">
                             <p className="slide-up-and-fade">
-                                I&apos;m a frontend-focused software developer
-                                with 3+ years of experience building responsive,
-                                high-performance web applications with HTML5,
-                                CSS3, JavaScript and TypeScript.
+                                {PROFESSIONAL_SUMMARY}
                             </p>
                             <p className="mt-3 slide-up-and-fade">
-                                I work with React, Next.js and Angular, and I&apos;m
-                                comfortable designing in Figma and turning
-                                wireframes into production-ready interfaces. I
-                                also integrate REST APIs and build server-side
-                                rendered pages for better SEO and load times.
-                            </p>
-                            <p className="mt-3 slide-up-and-fade">
-                                I&apos;m based in Thiruvananthapuram, Kerala, and
-                                I enjoy working closely with backend teams to
-                                ship end-to-end products that stay usable,
-                                fast and clean.
+                                I&apos;m currently based in Thiruvananthapuram,
+                                Kerala, and I&apos;m open to frontend and
+                                full-stack opportunities.
                             </p>
                         </div>
                     </div>

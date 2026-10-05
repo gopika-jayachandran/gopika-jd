@@ -28,3 +28,22 @@ export interface IProject {
     liveUrl?: string;
     sourceCode?: string;
 }
+
+export interface IStackItem {
+    name: string;
+    icon?: string;
+}
+
+export interface IExperience {
+    title: string;
+    company: string;
+    duration: string;
+    highlights: string[];
+}
+
+export interface IEducation {
+    title: string;
+    institution: string;
+    duration: string;
+}
+
