@@ -105,20 +105,6 @@ npm run lint      # eslint (next/core-web-vitals + next/typescript)
 
 ---
 
-## Configuration
-
-| Variable                  | Purpose                                          |
-| ------------------------- | ------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL`    | `metadataBase`, `sitemap.ts`, `robots.ts`        |
-| `NEXT_PUBLIC_GITHUB_REPO` | footer star/fork count (`owner/repo`)            |
-| `NEXT_PUBLIC_GA_ID`       | Google Analytics measurement ID                  |
-| `NEXT_PUBLIC_HOTJAR_ID`   | Hotjar site ID                                   |
-
-All optional — see `.env.example`. Analytics are injected only when the
-corresponding ID is set, so no third-party script loads in development.
-
----
-
 ## Customising
 
 **Content** — edit `lib/data.ts` (`GENERAL_INFO`, `PROFESSIONAL_SUMMARY`,
